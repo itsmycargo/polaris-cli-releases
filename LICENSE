@@ -1,0 +1,44 @@
+polaris command line software
+Copyright (c) 2026 ItsMyCargo GmbH. All rights reserved.
+
+1. Permitted use. You may install and use this software, in unmodified form,
+   to access services operated by or on behalf of ItsMyCargo GmbH
+   ("ItsMyCargo"), including those of forwarders that use ItsMyCargo. Your
+   use of those services remains subject to the terms of service of the
+   forwarder or ItsMyCargo account you use them with.
+
+2. Restrictions. Except as expressly permitted above, or as the licenses of
+   the third-party components allow (see 4), you may not copy, modify, adapt,
+   translate, decompile, disassemble or reverse engineer the software,
+   create derivative works of it, or distribute, sublicense, rent, lease,
+   sell or otherwise make it available to others, except to the extent
+   applicable law expressly permits this despite this restriction.
+
+3. Ownership. The software is licensed, not sold. ItsMyCargo retains all
+   rights, title and interest in it, including all intellectual property
+   rights. No rights are granted other than those expressly stated here.
+
+4. Third-party components. The software includes open-source components,
+   which are licensed to you under their own licenses, listed with their
+   notices in the THIRD_PARTY_NOTICES file distributed with the software.
+   Nothing in this license limits your rights under those licenses.
+
+5. No warranty. The software is provided "as is", without warranty of any
+   kind, express or implied, including the warranties of merchantability,
+   fitness for a particular purpose and non-infringement, to the extent
+   permitted by applicable law.
+
+6. Limitation of liability. To the extent permitted by applicable law,
+   ItsMyCargo shall not be liable for any indirect, incidental, special or
+   consequential damages, or loss of data, profits or business, arising out
+   of or in connection with the software or its use. Mandatory liability
+   under applicable law, including for intent, gross negligence and injury
+   to life, body or health, remains unaffected.
+
+7. Termination. This license ends automatically if you breach it, or when
+   your access to the services in 1 ends. You must then stop using the
+   software and delete all copies of it.
+
+8. Governing law. This license is governed by the laws of the Federal
+   Republic of Germany, excluding the UN Convention on Contracts for the
+   International Sale of Goods.
