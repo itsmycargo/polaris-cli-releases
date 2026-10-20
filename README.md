@@ -9,14 +9,8 @@ This repository holds the releases. Download the latest from
 
 ## Install
 
-macOS or Linux, with Homebrew:
-
-```sh
-brew install itsmycargo/tap/polaris
-```
-
-macOS or Linux, without it (installs to `/usr/local/bin`, or `~/.local/bin`,
-after checking the download's checksum):
+macOS or Linux (installs to `/usr/local/bin`, or `~/.local/bin`, after
+checking the download's checksum):
 
 ```sh
 curl -fsSL https://github.com/itsmycargo/polaris-cli-releases/releases/latest/download/install.sh | sh
