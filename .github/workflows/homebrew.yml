@@ -1,0 +1,57 @@
+name: Homebrew
+
+# Updates the formula in itsmycargo/homebrew-tap when a release is published,
+# not when it's built: releases start as drafts, whose downloads don't work
+# until an admin publishes them.
+on:
+  release:
+    types: [published]
+  # To write the formula again for a published release.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, e.g. v0.1.0
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: homebrew
+  cancel-in-progress: false
+
+jobs:
+  formula:
+    if: github.event_name == 'workflow_dispatch' || !github.event.release.prerelease
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Write the formula
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern checksums.txt --dir "$RUNNER_TEMP"
+          scripts/homebrew_formula.sh "$TAG" "$RUNNER_TEMP/checksums.txt" > "$RUNNER_TEMP/polaris.rb"
+      - uses: actions/checkout@v7
+        with:
+          repository: itsmycargo/homebrew-tap
+          path: tap
+          # A fine-grained token with contents: write on
+          # itsmycargo/homebrew-tap, and nothing else.
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+      - name: Push it to the tap
+        working-directory: tap
+        run: |
+          mkdir -p Formula
+          cp "$RUNNER_TEMP/polaris.rb" Formula/polaris.rb
+          git add Formula/polaris.rb
+          if git diff --cached --quiet; then
+            echo "Formula/polaris.rb is already $TAG"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "polaris ${TAG#v}"
+          git push

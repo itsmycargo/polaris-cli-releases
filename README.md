@@ -9,8 +9,14 @@ This repository holds the releases. Download the latest from
 
 ## Install
 
-macOS or Linux (installs to `/usr/local/bin`, or `~/.local/bin`, after
-checking the download's checksum):
+macOS or Linux, with Homebrew (`brew upgrade polaris` updates it):
+
+```sh
+brew install itsmycargo/tap/polaris
+```
+
+macOS or Linux, without it (installs to `/usr/local/bin`, or `~/.local/bin`,
+after checking the download's checksum):
 
 ```sh
 curl -fsSL https://github.com/itsmycargo/polaris-cli-releases/releases/latest/download/install.sh | sh
@@ -38,6 +44,15 @@ with your forwarder's slug, in the web app under **Settings → Command line**.
 For scripts, CI jobs and agents, create a personal access token in the web app
 under **Settings → API tokens**, and set it as `POLARIS_TOKEN` instead.
 
+Working with more than one forwarder, or as staff of one and a client of
+another? Each login works in one organization, so give each its own profile:
+
+```sh
+polaris login --org globex --profile globex
+polaris --profile globex quotes list
+polaris auth list
+```
+
 ## Use it
 
 ```sh
@@ -51,8 +66,38 @@ polaris shipments updates <shipment request id>
 Every command takes `--json`, and `polaris <command> --help` explains it.
 `polaris api` calls any other operation of the API you have access to.
 
-AI agents: read
-[AGENTS.md](https://github.com/itsmycargo/polaris-cli-releases/releases/latest/download/AGENTS.md).
+## With an AI agent
+
+polaris comes with an [Agent Skill](https://agentskills.io) that teaches
+Claude Code, Codex and other agents to use it: the workflow, the rules (such
+as asking you before booking) and what the errors mean. Install it once, and
+again after updating polaris:
+
+```sh
+polaris skill install              # Claude Code: ~/.claude/skills/polaris
+polaris skill install --for codex  # Codex: ~/.codex/skills/polaris
+polaris skill install --dir <your agent's skills folder>
+```
+
+The skill is also in every release archive, under `skill/polaris`. Agents
+without skills support can read
+[AGENTS.md](https://github.com/itsmycargo/polaris-cli-releases/releases/latest/download/AGENTS.md)
+instead.
+
+## For your backoffice
+
+Staff of the forwarder can also use polaris for admin work, such as uploading
+rate sheets, quoting for a client or seeing why a quote failed, once the
+organization switches on **Admin Access for the CLI and API Tokens**:
+
+```sh
+polaris login --org <slug> --admin
+polaris admin quotes why <query id>
+polaris admin uploads create rates.xlsx
+```
+
+Approving an admin login takes your two-factor code. `polaris admin --help`
+lists the commands.
 
 ## Verifying a download
 
